@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Sistema de Migración - Patata Country</title>
+    <link rel="icon" type="image/x-icon" href="https://i.imgur.com/hYa1NhY_d.webp?maxwidth=760&fidelity=grand">
+    <style>
+        body {
+            background-color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        body.background-image {
+            background-image: url('https://i.imgur.com/UxSnQnT.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .background-image {
+            background-image: url('https://i.imgur.com/UxSnQnT.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .container img {
+            max-width: 250px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333333;
+            margin-bottom: 20px;
+            
+        }
+
+        .title_migration {
+            font-size: 25px;
+            font-weight: bold;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 16px;
+            color: #333333;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        select, input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        button[type="submit"] {
+            background-color: #03045E;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 80px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0419de;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+
+        .success {
+            color: green;
+            font-size: 16px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+
+        .loading {
+            display: none;
+            margin-top: -30px;
+        }
+
+        .horizontal-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .column {
+            flex: 1;
+            margin: 0 10px;
+            text-align: left;
+        }
+
+        #fechaRegreso {
+            flex: 1;
+            margin: 0 10px;
+            text-align: left; 
+            margin-top: 3px;
+           
+            display: block;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .nub {
+            display:none;
+        }
+
+        #precioTotal {
+            max-width: 300px;
+        
+            display: flex;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body class="background-image">
+    <div class="container">
+        <h1 class="title_migration">Sistema de Migración | PIP | PATATA 2024</h1>
+        <hr>
+        <br>
+        <form id="flightForm">
+            <div class="horizontal-container">
+                <div class="column">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" autofocus required>
+                </div>
+                <div class="column">
+                    <label for="usuario">Usuario:</label>
+                    <input type="text" id="usuario" name="usuario" required>
+                </div>
+                <div class="column">
+                    <label for="cedula">Cedula:</label>
+                    <input type="number" id="cedula" name="cedula" required>
+                </div>
+                <div class="column">
+                    <label for="pasaporte">Pasaporte:</label>
+                    <input type="number" id="pasaporte" name="pasaporte" required>
+                </div>
+                
+            </div>
+            <div class="horizontal-container">
+                <div class="column">
+                    <label for="salida">Salida:</label>
+                    <select id="salida" name="salida" required>
+                        <option value="" disabled selected hidden>Escoger...</option>
+                        <option value="Aeropuerto Internacional Patata City">Aeropuerto Internacional Patata City</option>
+                        <option value="Aeropuerto Bartolome Island">Aeropuerto Bartolome Island</option>
+                        <option value="Aeropuerto La Fernandina">Aeropuerto La Fernandina</option>
+                        <option value="Aeropuerto Ice Beaches">Aeropuerto Ice Beaches</option>
+                    </select>
+                </div>
+                <div class="column">
+                    <label for="llegada">Llegada:</label>
+                    <select id="llegada" name="llegada" required>
+                        <option value="" disabled selected hidden>Escoger...</option>
+                        <option value="Aeropuerto Internacional Patata City">Aeropuerto Internacional Patata City</option>
+                        <option value="Aeropuerto Bartolome Island">Aeropuerto Bartolome Island</option>
+                        <option value="Aeropuerto La Fernandina">Aeropuerto La Fernandina</option>
+                        <option value="Aeropuerto Ice Beaches">Aeropuerto Ice Beaches</option>
+                    </select>
+                </div>
+                <div class="column">
+                    <label for="ultimo-destino">Ultimo Destino:</label>
+                    <select id="ultimo-destino" name="ultimo-destino" required>
+                        <option value="SI">Si</option>
+                        <option value="NO">No</option>
+                    </select>
+                </div>
+                <div class="column">
+                    <label for="ida">Ida y Vuelta:</label>
+                    <select id="ida" name="ida" required onchange="toggleDateField()">
+                        <option value="" disabled selected hidden>Escoger...</option>
+                        <option value="NO">No</option>
+                        <option value="SI">Si</option>
+                    </select>
+                </div>
+                <div class="column" id="invisibleElement1" style="display:none;">
+                    <label for="fechaRegreso" class="nub">Fecha de Regreso:</label>
+                    <input type="date" id="fechaRegreso" name="fechaRegreso" required min onchange="checkDate()">
+                </div>
+
+                <div class="column">
+                    <label for="type">Tipo de Vuelo:</label>
+                    <select id="type" name="type" required onchange="toggleElements()">
+                        <option value="COMERCIAL">Comercial</option>
+                        <option value="PRIVADO">Privado</option>
+                    </select>
+                </div>
+                
+                <div class="column" id="visibleElement">
+                    <label for="vuelo">Número de Vuelo:</label>
+                    <input type="text" id="vuelo" name="vuelo" required placeholder="PAXXXX">
+                </div>
+                
+                <div class="column" id="invisibleElement" style="display:none;">
+                    <label for="otroElemento">Registración:</label>
+                    <input type="text" id="otroElemento" name="otroElemento" required placeholder="PCXX7XK">
+                </div>
+           
+        </div>
+
+           
+            <div class="horizontal-container">
+                <div class="column">
+                    <label for="motivo">Motivo del viaje:</label>
+                    <input type="text" id="motivo" name="motivo" placeholder="..." required>
+                </div>
+                <div class="column">
+                    <label for="declaracion">Declaración:</label>
+                    <input type="text" id="declaracion" name="declaracion" placeholder="n/a">
+                </div>
+                <div class="column">
+                    <label for="efectivo">Dinero en Efectivo:</label>
+                    <input type="number" step="0.10" min="0.00" max="5000" id="efectivo" name="efectivo" placeholder="0.00" required>
+                </div>
+                <div class="column">
+                    <label for="status">Autorización:</label>
+                    <select id="status" name="status" required>
+                        <option value="" disabled selected hidden>Escoger...</option>
+                        <option value="RECHAZADO">Rechazado</option>
+                        <option value="APROBADO">Aprobado</option>
+                    </select>
+                </div>
+            </div>
+
+            <hr>
+            <br>
+
+            <label for="precioTotal">Autorizado por:</label>
+            <input type="text" id="precioTotal" name="precioTotal" disabled>
+
+            <label id="messageLabel">Gobierno de Patata Country</label>
+            <label id="messageLabel1">Juntos lo logramos!</label>
+            <label id="messageLabel2">BETA.V.1.7</label>
+
+            <button type="submit" id="submitButton">Registrar</button>
+            <div class="loading">
+                <img src="https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca_w200.gif" alt="Loading" width="30">
+            </div>
+        </form>
+
+        <div id="errorContainer"></div>
+        <div id="successContainer"></div>
+    </div>
+
+    <script>
+        updatePerson('test_admin');
+
+        function updatePerson(person) {
+            var precioTotal = document.getElementById("precioTotal");
+
+            precioTotal.value = person;
+            precioTotal.textContent = person;
+        }
+        function toggleElements() {
+    var type = document.getElementById("type").value;
+    var visibleElement = document.getElementById("visibleElement");
+    var invisibleElement = document.getElementById("invisibleElement");
+    
+
+    if (type === "COMERCIAL") {
+        visibleElement.style.display = "block";
+        invisibleElement.style.display = "none";
+        document.getElementById("otroElemento").value = ""; // Limpiar campo
+
+        document.getElementById("vuelo").setAttribute("required", "required");
+        document.getElementById("otroElemento").removeAttribute("required");
+
+        
+
+       // document.getElementById("otroElemento").setAttribute("disabled", true); // Deshabilitar campo
+    } else if (type === "PRIVADO") {
+        visibleElement.style.display = "none";
+        document.getElementById("vuelo").removeAttribute("required");
+        document.getElementById("otroElemento").setAttribute("required", "required");
+        invisibleElement.style.display = "block";
+        document.getElementById("vuelo").value = ""; // Limpiar campo
+        //document.getElementById("otroElemento").removeAttribute("disabled"); // Habilitar campo
+    }
+}
+
+
+    window.onload = toggleElements;
+
+    function toggleDateField() {
+        var ida = document.getElementById("ida").value;
+        var fechaRegresoElement = document.getElementById("invisibleElement1");
+        if (ida === "SI") {
+            fechaRegresoElement.style.display = "block";
+            // Establecer la fecha mínima como la fecha actual
+            document.getElementById("fechaRegreso").min = new Date().toISOString().split('T')[0];
+        } else {
+            fechaRegresoElement.style.display = "none";
+        }
+    }
+
+    function checkDate() {
+        var selectedDate = new Date(document.getElementById("fechaRegreso").value);
+        var currentDate = new Date();
+        if (selectedDate < currentDate) {
+            alert("La fecha de regreso no puede ser anterior a la fecha actual.");
+            document.getElementById("fechaRegreso").value = "";
+        }
+    }
+       
+
+        
+        function sendData() {
+            var nombre = document.getElementById("nombre").value;
+            var usuario = document.getElementById("usuario").value;
+            var cedula = document.getElementById("cedula").value;
+            var pasaporte = document.getElementById("pasaporte").value;
+            var salida = document.getElementById("salida").value;
+            var llegada = document.getElementById("llegada").value;
+            var motivo = document.getElementById("motivo").value;
+            var efectivo = document.getElementById("efectivo").value;
+            var ida = document.getElementById("ida").value;
+            var fechaida = 'n/a'
+            var typeDeVuelo = document.getElementById("type").value;
+            var numerovuelo
+            var registracionPriv
+
+            if (ida === "SI") {
+                fechaida = document.getElementById("fechaRegreso").value;
+            }
+
+
+            if (typeDeVuelo === "COMERCIAL") {
+                numerovuelo = document.getElementById("vuelo").value;
+                registracionPriv = 'n/a';
+            } else if (typeDeVuelo === "PRIVADO") {
+                registracionPriv = document.getElementById("otroElemento").value;
+                numerovuelo = 'n/a';
+            }
+
+            //fecha hora
+            var ultimoDestino = document.getElementById("ultimo-destino").value;
+            var declaracion
+    
+
+            var status = document.getElementById("status").value; //autorizacion
+            
+            var agente = document.getElementById("precioTotal").value;
+
+            
+            if (declaracion === "") {
+                declaracion = "n/a"
+            } else {
+                declaracion = document.getElementById("declaracion").value;
+            }
+
+            toString(agente);
+        
+
+            var now = new Date();
+            var day = now.getDate().toString().padStart(2, '0');
+            var month = (now.getMonth() + 1).toString().padStart(2, '0');
+            var year = now.getFullYear();
+            var hours = now.getHours().toString().padStart(2, '0');
+            var minutes = now.getMinutes().toString().padStart(2, '0');
+            var seconds = now.getSeconds().toString().padStart(2, '0');
+
+            var hora1 = `${day}-${month}-${year} | ${hours}:${minutes}:${seconds}`;
+
+            
+
+           
+    
+            
+            document.getElementById("errorContainer").innerHTML = "";
+            document.getElementById("successContainer").innerHTML = "";
+            document.getElementsByClassName("loading")[0].style.display = "none";
+
+            
+            if (salida === llegada) {
+                showError("La salida y la llegada no pueden ser iguales.");
+                setTimeout(function() {
+                            var errorContainer = document.getElementById("errorContainer");
+                            errorContainer.innerHTML = "";
+
+                            var successContainer = document.getElementById("successContainer");
+                            successContainer.innerHTML = "";
+                        }, 3000);
+            } else if (nombre.trim().length === 0) {
+                showError("Por favor especifica un nombre.");
+                setTimeout(function() {
+                            var errorContainer = document.getElementById("errorContainer");
+                            errorContainer.innerHTML = "";
+
+                            var successContainer = document.getElementById("successContainer");
+                            successContainer.innerHTML = "";
+                        }, 3000);
+            } else if (usuario.trim().length === 0) {
+                showError("Por favor especifica un usuario.");
+                setTimeout(function() {
+                            var errorContainer = document.getElementById("errorContainer");
+                            errorContainer.innerHTML = "";
+
+                            var successContainer = document.getElementById("successContainer");
+                            successContainer.innerHTML = "";
+                        }, 3000);
+            } else if (cedula.trim().length === 0) {
+                showError("Por favor especifica una cedula númerica y valida");
+                setTimeout(function() {
+                            var errorContainer = document.getElementById("errorContainer");
+                            errorContainer.innerHTML = "";
+
+                            var successContainer = document.getElementById("successContainer");
+                            successContainer.innerHTML = "";
+                        }, 3000);
+            } else if (document.getElementById("precioTotal").value === 'n/a') {
+                showError("Por favor inicia sesión antes de continuar.");
+                setTimeout(function() {
+                            var errorContainer = document.getElementById("errorContainer");
+                            errorContainer.innerHTML = "";
+
+                            var successContainer = document.getElementById("successContainer");
+                            successContainer.innerHTML = "";
+                        }, 3000);
+            } else if (document.getElementById("precioTotal").value === 'SISTEMA BLOQUEADO' | document.getElementById("precioTotal").value === 'EMERGENCIA' | document.getElementById("precioTotal").value === 'Emergencia') {
+                showError("El sistema se encuentra bloqueado, por favor contacta al administrador para desactivarlo.");
+                setTimeout(function() {
+                            var errorContainer = document.getElementById("errorContainer");
+                            errorContainer.innerHTML = "";
+
+                            var successContainer = document.getElementById("successContainer");
+                            successContainer.innerHTML = "";
+                        }, 3000);
+            } else {
+                var url = "https://script.google.com/macros/s/AKfycbyJAGB79BGODCJ2UC3wGaDT9zscv2HbrbHfKtcOrKX6y5r4zQjVcHTomwvP5Ws805Tz/exec";
+                var params = "nombre=" + encodeURIComponent(nombre) + "&usuario=" + encodeURIComponent(usuario) + "&cedula=" + encodeURIComponent(cedula) + "&pasaporte=" + encodeURIComponent(pasaporte) + "&salida=" + encodeURIComponent(salida) + "&llegada=" + encodeURIComponent(llegada) + "&hora1=" + encodeURIComponent(hora1) + "&ultimodestino=" + encodeURIComponent(ultimoDestino) + "&declaracion=" + encodeURIComponent(declaracion) + "&status=" + encodeURIComponent(status) + "&agente=" + encodeURIComponent(agente) + "&motivo=" + encodeURIComponent(motivo) + "&efectivo=" + encodeURIComponent(efectivo) + "&ida=" + encodeURIComponent(ida) + "&fechaida=" + encodeURIComponent(fechaida) + "&typevuelo=" + encodeURIComponent(typeDeVuelo) + "&vuelo=" + encodeURIComponent(numerovuelo) + "&registracion=" + encodeURIComponent(registracionPriv);
+                console.log(params)
+
+                
+                document.getElementsByClassName("loading")[0].style.display = "block";
+                disableForm();
+                
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data: params,
+                    dataType: 'jsonp',
+                    success: function(response) {
+                        document.getElementsByClassName("loading")[0].style.display = "none";
+                        enableForm();
+                        showError("Error critico en el sistema. Por favor contactar con soporte técnico.");
+                        setTimeout(function() {
+                            var errorContainer = document.getElementById("errorContainer");
+                            errorContainer.innerHTML = "";
+
+                            var successContainer = document.getElementById("successContainer");
+                            successContainer.innerHTML = "";
+                        }, 3000);
+                    },
+                    error: function(xhr, status, error) {
+                        document.getElementsByClassName("loading")[0].style.display = "none";
+                        enableForm();
+                        showSuccess("Datos registrados exitosamente!");
+                        deleteValues();
+                        setTimeout(function() {
+                            var errorContainer = document.getElementById("errorContainer");
+                            errorContainer.innerHTML = "";
+
+                            var successContainer = document.getElementById("successContainer");
+                            successContainer.innerHTML = "";
+                        }, 3000);
+                    }
+                });
+
+            }
+        }
+
+       
+
+        function showError(message) {
+            var errorContainer = document.getElementById("errorContainer");
+            errorContainer.innerHTML = "<div class='error'>" + message + "</div>";
+        }
+        
+        function showSuccess(message) {
+            var successContainer = document.getElementById("successContainer");
+            successContainer.innerHTML = "<div class='success'>" + message + "</div>";
+        }
+
+        function disableForm() {
+            document.getElementById("submitButton").disabled = true;
+            document.getElementById("nombre").disabled = true;
+            document.getElementById("usuario").disabled = true;
+            document.getElementById("cedula").disabled = true;
+            document.getElementById("motivo").disabled = true;
+            document.getElementById("efectivo").disabled = true;
+            document.getElementById("pasaporte").disabled = true;
+            document.getElementById("ida").disabled = true;
+            document.getElementById("salida").disabled = true;
+            document.getElementById("llegada").disabled = true;
+            document.getElementById("ultimo-destino").disabled = true;
+            document.getElementById("declaracion").disabled = true;
+            document.getElementById("visibleElement").disabled = true;
+            document.getElementById("invisibleElement").disabled = true;
+            document.getElementById("fechaRegreso").disabled = true;
+            document.getElementById("type").disabled = true;
+            document.getElementById("status").disabled = true;
+            document.getElementById("vuelo").disabled = true;
+            document.getElementById("otroElemento").disabled = true
+        }
+
+        function deleteValues() {
+            document.getElementById("nombre").value = "";
+            document.getElementById("usuario").value = "";
+            document.getElementById("cedula").value = "";
+            document.getElementById("motivo").value = "";
+            document.getElementById("efectivo").value = "";
+            document.getElementById("pasaporte").value = "";
+            document.getElementById("salida").selectedIndex = 0;
+            document.getElementById("ida").selectedIndex = 0;
+            document.getElementById("llegada").selectedIndex = 0;
+            document.getElementById("ultimo-destino").selectedIndex = 0;
+            document.getElementById("type").selectedIndex = 0;
+            document.getElementById("declaracion").value = "";
+            document.getElementById("vuelo").value = "";
+            document.getElementById("fechaRegreso").value = "";
+            document.getElementById("otroElemento").value = "";
+            document.getElementById("status").selectedIndex = 0;
+            toggleDateField()
+            //document.getElementById("status").tabIndex = 0;
+        }
+        
+        function enableForm() {
+            document.getElementById("submitButton").disabled = false;
+            document.getElementById("nombre").disabled = false;
+            document.getElementById("motivo").disabled = false;
+            document.getElementById("efectivo").disabled = false;
+            document.getElementById("ida").disabled = false;
+            document.getElementById("usuario").disabled = false;
+            document.getElementById("cedula").disabled = false;
+            document.getElementById("pasaporte").disabled = false;
+            document.getElementById("salida").disabled = false;
+            document.getElementById("llegada").disabled = false;
+            document.getElementById("ultimo-destino").disabled = false;
+            document.getElementById("declaracion").disabled = false;
+            document.getElementById("status").disabled = false;
+            document.getElementById("visibleElement").disabled = false;
+            document.getElementById("invisibleElement").disabled = false;
+            document.getElementById("fechaRegreso").disabled = false;
+            document.getElementById("type").disabled = false;
+            document.getElementById("vuelo").disabled = false;
+            document.getElementById("otroElemento").disabled = false;
+        }
+
+        document.getElementById("flightForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            sendData();
+        });
+
+
+        document.querySelector(".title_migration").addEventListener("paste", (event) => {
+            let imput = prompt('Ingrese su nombre de usuario por favor.');
+
+      
+
+            if (imput === "admin_unlock") {
+                updatePerson("n/a");
+                showSuccess("El sistema fue desbloqueado.");
+                
+                setTimeout(function() {
+                            var errorContainer = document.getElementById("errorContainer");
+                            errorContainer.innerHTML = "";
+
+                            var successContainer = document.getElementById("successContainer");
+                            successContainer.innerHTML = "";
+                        }, 3000);
+                        return
+            }
+
+            if (document.getElementById("precioTotal").value === 'SISTEMA BLOQUEADO' | document.getElementById("precioTotal").value === 'EMERGENCIA' | document.getElementById("precioTotal").value === 'Emergencia') {
+                showError('El sistema se encuentra bloqueado. Por favor llama a un administrador para desbloquearlo.')
+                setTimeout(function() {
+                            var errorContainer = document.getElementById("errorContainer");
+                            errorContainer.innerHTML = "";
+
+                            var successContainer = document.getElementById("successContainer");
+                            successContainer.innerHTML = "";
+                        }, 3000);
+                return
+            }
+
+            if (imput === "test_admin" | imput === "Luis Marcelo Medina H." | imput === "Martin Fernando Miranda A.") {
+                updatePerson(imput);
+            } else if (imput === "close" | imput === "close_sesion" | imput === "cerrar" | imput === "cerrar_sesion") {
+                updatePerson("n/a");
+            } else if (imput === "police" | imput === "call_police" | imput === "policia" | imput === "llamar_policia" | imput === "ayuda") {
+                updatePerson("SISTEMA BLOQUEADO");
+                alert("Los servicios policiales de emergencia fueron llamados hacia su ventanilla.\nPor favor espere un momento.\n\nRecuerde no autorizar el ingreso y marcarlo como rechazado, además de llenar la declaración con nota judicial []");
+            } else {
+                showError('Usuario incorrecto.')
+                setTimeout(function() {
+                            var errorContainer = document.getElementById("errorContainer");
+                            errorContainer.innerHTML = "";
+
+                            var successContainer = document.getElementById("successContainer");
+                            successContainer.innerHTML = "";
+                        }, 3000);
+            }
+            
+            event.preventDefault();
+        })
+    </script>
+</body>
+</html>
