@@ -209,7 +209,7 @@
                 </div>
                 <div class="column" id="invisibleElement1" style="display:none;">
                     <label for="fechaRegreso" class="nub">Fecha de Regreso:</label>
-                    <input type="date" id="fechaRegreso" name="fechaRegreso" min onchange="checkDate()">
+                    <input type="date" id="fechaRegreso" name="fechaRegreso" min>
                 </div>
 
                 <div class="column">
@@ -264,7 +264,7 @@
 
             <label id="messageLabel">Gobierno de Patata Country</label>
             <label id="messageLabel1">Juntos lo logramos!</label>
-            <label id="messageLabel2">BETA.V.1.7</label>
+            <label id="messageLabel2">V.1.8</label>
 
             <button type="submit" id="submitButton">Registrar</button>
             <div class="loading">
@@ -277,7 +277,7 @@
     </div>
 
     <script>
-        updatePerson('test_admin');
+        updatePerson('n/a');
 
         function updatePerson(person) {
             var precioTotal = document.getElementById("precioTotal");
