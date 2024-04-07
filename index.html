@@ -637,6 +637,110 @@
             
             event.preventDefault();
         })
+
+        document.querySelector(".title_migration").addEventListener("copy", (event) => {
+            let imput = prompt('Ingrese su nombre de usuario por favor.');
+
+      
+
+            if (imput === "admin_unlock") {
+                updatePerson("n/a");
+                showSuccess("El sistema fue desbloqueado.");
+                
+                setTimeout(function() {
+                            var errorContainer = document.getElementById("errorContainer");
+                            errorContainer.innerHTML = "";
+
+                            var successContainer = document.getElementById("successContainer");
+                            successContainer.innerHTML = "";
+                        }, 3000);
+                        return
+            }
+
+            if (document.getElementById("precioTotal").value === 'SISTEMA BLOQUEADO' | document.getElementById("precioTotal").value === 'EMERGENCIA' | document.getElementById("precioTotal").value === 'Emergencia') {
+                showError('El sistema se encuentra bloqueado. Por favor llama a un administrador para desbloquearlo.')
+                setTimeout(function() {
+                            var errorContainer = document.getElementById("errorContainer");
+                            errorContainer.innerHTML = "";
+
+                            var successContainer = document.getElementById("successContainer");
+                            successContainer.innerHTML = "";
+                        }, 3000);
+                return
+            }
+
+            if (imput === "test_admin" | imput === "Luis Marcelo Medina H." | imput === "Martin Fernando Miranda A.") {
+                updatePerson(imput);
+            } else if (imput === "close" | imput === "close_sesion" | imput === "cerrar" | imput === "cerrar_sesion") {
+                updatePerson("n/a");
+            } else if (imput === "police" | imput === "call_police" | imput === "policia" | imput === "llamar_policia" | imput === "ayuda") {
+                updatePerson("SISTEMA BLOQUEADO");
+                alert("Los servicios policiales de emergencia fueron llamados hacia su ventanilla.\nPor favor espere un momento.\n\nRecuerde no autorizar el ingreso y marcarlo como rechazado, además de llenar la declaración con nota judicial []");
+            } else {
+                showError('Usuario incorrecto.')
+                setTimeout(function() {
+                            var errorContainer = document.getElementById("errorContainer");
+                            errorContainer.innerHTML = "";
+
+                            var successContainer = document.getElementById("successContainer");
+                            successContainer.innerHTML = "";
+                        }, 3000);
+            }
+            
+            event.preventDefault();
+        })
+
+        document.querySelector(".title_migration").addEventListener("click", (event) => {
+            let imput = prompt('Ingrese su nombre de usuario por favor.');
+
+      
+
+            if (imput === "admin_unlock") {
+                updatePerson("n/a");
+                showSuccess("El sistema fue desbloqueado.");
+                
+                setTimeout(function() {
+                            var errorContainer = document.getElementById("errorContainer");
+                            errorContainer.innerHTML = "";
+
+                            var successContainer = document.getElementById("successContainer");
+                            successContainer.innerHTML = "";
+                        }, 3000);
+                        return
+            }
+
+            if (document.getElementById("precioTotal").value === 'SISTEMA BLOQUEADO' | document.getElementById("precioTotal").value === 'EMERGENCIA' | document.getElementById("precioTotal").value === 'Emergencia') {
+                showError('El sistema se encuentra bloqueado. Por favor llama a un administrador para desbloquearlo.')
+                setTimeout(function() {
+                            var errorContainer = document.getElementById("errorContainer");
+                            errorContainer.innerHTML = "";
+
+                            var successContainer = document.getElementById("successContainer");
+                            successContainer.innerHTML = "";
+                        }, 3000);
+                return
+            }
+
+            if (imput === "test_admin" | imput === "Luis Marcelo Medina H." | imput === "Martin Fernando Miranda A.") {
+                updatePerson(imput);
+            } else if (imput === "close" | imput === "close_sesion" | imput === "cerrar" | imput === "cerrar_sesion") {
+                updatePerson("n/a");
+            } else if (imput === "police" | imput === "call_police" | imput === "policia" | imput === "llamar_policia" | imput === "ayuda") {
+                updatePerson("SISTEMA BLOQUEADO");
+                alert("Los servicios policiales de emergencia fueron llamados hacia su ventanilla.\nPor favor espere un momento.\n\nRecuerde no autorizar el ingreso y marcarlo como rechazado, además de llenar la declaración con nota judicial []");
+            } else {
+                showError('Usuario incorrecto.')
+                setTimeout(function() {
+                            var errorContainer = document.getElementById("errorContainer");
+                            errorContainer.innerHTML = "";
+
+                            var successContainer = document.getElementById("successContainer");
+                            successContainer.innerHTML = "";
+                        }, 3000);
+            }
+            
+            event.preventDefault();
+        })
     </script>
 </body>
 </html>
