@@ -179,7 +179,9 @@
                         <option value="Aeropuerto Internacional Patata City">Aeropuerto Internacional Patata City</option>
                         <option value="Aeropuerto Bartolome Island">Aeropuerto Bartolome Island</option>
                         <option value="Aeropuerto La Fernandina">Aeropuerto La Fernandina</option>
-                        <option value="Aeropuerto Ice Beaches">Aeropuerto Ice Beaches</option>
+                        <option value="Aeropuerto de Trolome">Aeropuerto Ice Beaches</option>
+                        <option value="Aeropuerto de Mykonos">Aeropuerto Ice Beaches</option>
+                        <option value="Aeropuerto de Rio Coca">Aeropuerto Ice Beaches</option>
                     </select>
                 </div>
                 <div class="column">
@@ -189,7 +191,9 @@
                         <option value="Aeropuerto Internacional Patata City">Aeropuerto Internacional Patata City</option>
                         <option value="Aeropuerto Bartolome Island">Aeropuerto Bartolome Island</option>
                         <option value="Aeropuerto La Fernandina">Aeropuerto La Fernandina</option>
-                        <option value="Aeropuerto Ice Beaches">Aeropuerto Ice Beaches</option>
+                        <option value="Aeropuerto de Trolome">Aeropuerto Ice Beaches</option>
+                        <option value="Aeropuerto de Mykonos">Aeropuerto Ice Beaches</option>
+                        <option value="Aeropuerto de Rio Coca">Aeropuerto Ice Beaches</option>
                     </select>
                 </div>
                 <div class="column">
@@ -217,6 +221,7 @@
                     <select id="type" name="type" required onchange="toggleElements()">
                         <option value="COMERCIAL">Comercial</option>
                         <option value="PRIVADO">Privado</option>
+                        <option value="MANUAL">Manual</option>
                     </select>
                 </div>
                 
@@ -264,7 +269,7 @@
 
             <label id="messageLabel">Gobierno de Patata Country</label>
             <label id="messageLabel1">Juntos lo logramos!</label>
-            <label id="messageLabel2">V.1.8</label>
+            <label id="messageLabel2">V.1.9</label>
 
             <button type="submit" id="submitButton">Registrar</button>
             <div class="loading">
@@ -303,6 +308,13 @@
 
        // document.getElementById("otroElemento").setAttribute("disabled", true); // Deshabilitar campo
     } else if (type === "PRIVADO") {
+        visibleElement.style.display = "none";
+        document.getElementById("vuelo").removeAttribute("required");
+        document.getElementById("otroElemento").setAttribute("required", "required");
+        invisibleElement.style.display = "block";
+        document.getElementById("vuelo").value = ""; // Limpiar campo
+        //document.getElementById("otroElemento").removeAttribute("disabled"); // Habilitar campo
+    } else if (type === "MANUAL") {
         visibleElement.style.display = "none";
         document.getElementById("vuelo").removeAttribute("required");
         document.getElementById("otroElemento").setAttribute("required", "required");
@@ -362,6 +374,9 @@
                 numerovuelo = document.getElementById("vuelo").value;
                 registracionPriv = 'n/a';
             } else if (typeDeVuelo === "PRIVADO") {
+                registracionPriv = document.getElementById("otroElemento").value;
+                numerovuelo = 'n/a';
+            } else if (typeDeVuelo === "MANUAL") {
                 registracionPriv = document.getElementById("otroElemento").value;
                 numerovuelo = 'n/a';
             }
@@ -605,7 +620,7 @@
                         return
             }
 
-            if (document.getElementById("precioTotal").value === 'SISTEMA BLOQUEADO' | document.getElementById("precioTotal").value === 'EMERGENCIA' | document.getElementById("precioTotal").value === 'Emergencia') {
+            if (document.getElementById("precioTotal").value === 'SISTEMA BLOQUEADO' | document.getElementById("precioTotal").value === 'EMERGENCIA' | document.getElementById("precioTotal").value === 'Emergencia') | document.getElementById("precioTotal").value === '911') {
                 showError('El sistema se encuentra bloqueado. Por favor llama a un administrador para desbloquearlo.')
                 setTimeout(function() {
                             var errorContainer = document.getElementById("errorContainer");
@@ -617,7 +632,7 @@
                 return
             }
 
-            if (imput === "test_admin" | imput === "Luis Marcelo Medina H." | imput === "Martin Fernando Miranda A.") {
+            if (imput === "Luis Marcelo Medina H." | imput === "Martin Fernando Miranda A." | imput === "Torre de Control") {
                 updatePerson(imput);
             } else if (imput === "close" | imput === "close_sesion" | imput === "cerrar" | imput === "cerrar_sesion") {
                 updatePerson("n/a");
@@ -657,7 +672,7 @@
                         return
             }
 
-            if (document.getElementById("precioTotal").value === 'SISTEMA BLOQUEADO' | document.getElementById("precioTotal").value === 'EMERGENCIA' | document.getElementById("precioTotal").value === 'Emergencia') {
+            if (document.getElementById("precioTotal").value === 'SISTEMA BLOQUEADO' | document.getElementById("precioTotal").value === 'EMERGENCIA' | document.getElementById("precioTotal").value === 'Emergencia') | document.getElementById("precioTotal").value === '911') {
                 showError('El sistema se encuentra bloqueado. Por favor llama a un administrador para desbloquearlo.')
                 setTimeout(function() {
                             var errorContainer = document.getElementById("errorContainer");
@@ -669,11 +684,11 @@
                 return
             }
 
-            if (imput === "test_admin" | imput === "Luis Marcelo Medina H." | imput === "Martin Fernando Miranda A.") {
+            if (imput === "Luis Marcelo Medina H." | imput === "Martin Fernando Miranda A." | imput === "Torre de Control") {
                 updatePerson(imput);
             } else if (imput === "close" | imput === "close_sesion" | imput === "cerrar" | imput === "cerrar_sesion") {
                 updatePerson("n/a");
-            } else if (imput === "police" | imput === "call_police" | imput === "policia" | imput === "llamar_policia" | imput === "ayuda") {
+            } else if (imput === "police" | imput === "call_police" | imput === "policia" | imput === "llamar_policia" | imput === "ayuda" | imput === "911") {
                 updatePerson("SISTEMA BLOQUEADO");
                 alert("Los servicios policiales de emergencia fueron llamados hacia su ventanilla.\nPor favor espere un momento.\n\nRecuerde no autorizar el ingreso y marcarlo como rechazado, además de llenar la declaración con nota judicial []");
             } else {
@@ -709,7 +724,7 @@
                         return
             }
 
-            if (document.getElementById("precioTotal").value === 'SISTEMA BLOQUEADO' | document.getElementById("precioTotal").value === 'EMERGENCIA' | document.getElementById("precioTotal").value === 'Emergencia') {
+            if (document.getElementById("precioTotal").value === 'SISTEMA BLOQUEADO' | document.getElementById("precioTotal").value === 'EMERGENCIA' | document.getElementById("precioTotal").value === 'Emergencia' | document.getElementById("precioTotal").value === '911') {
                 showError('El sistema se encuentra bloqueado. Por favor llama a un administrador para desbloquearlo.')
                 setTimeout(function() {
                             var errorContainer = document.getElementById("errorContainer");
@@ -721,11 +736,11 @@
                 return
             }
 
-            if (imput === "test_admin" | imput === "Luis Marcelo Medina H." | imput === "Martin Fernando Miranda A.") {
+            if (imput === "Luis Marcelo Medina H." | imput === "Martin Fernando Miranda A." | imput === "Torre de Control") {
                 updatePerson(imput);
             } else if (imput === "close" | imput === "close_sesion" | imput === "cerrar" | imput === "cerrar_sesion") {
                 updatePerson("n/a");
-            } else if (imput === "police" | imput === "call_police" | imput === "policia" | imput === "llamar_policia" | imput === "ayuda") {
+            } else if (imput === "police" | imput === "call_police" | imput === "policia" | imput === "llamar_policia" | imput === "ayuda" | imput === "911") {
                 updatePerson("SISTEMA BLOQUEADO");
                 alert("Los servicios policiales de emergencia fueron llamados hacia su ventanilla.\nPor favor espere un momento.\n\nRecuerde no autorizar el ingreso y marcarlo como rechazado, además de llenar la declaración con nota judicial []");
             } else {
