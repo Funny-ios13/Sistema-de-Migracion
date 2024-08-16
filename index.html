@@ -177,23 +177,23 @@
                     <select id="salida" name="salida" required>
                         <option value="" disabled selected hidden>Escoger...</option>
                         <option value="Aeropuerto Internacional Patata City">Aeropuerto Internacional Patata City</option>
-                        <option value="Aeropuerto Bartolome Island">Aeropuerto Bartolome Island</option>
-                        <option value="Aeropuerto La Fernandina">Aeropuerto La Fernandina</option>
-                        <option value="Aeropuerto de Trolome">Aeropuerto Ice Beaches</option>
-                        <option value="Aeropuerto de Mykonos">Aeropuerto Ice Beaches</option>
-                        <option value="Aeropuerto de Rio Coca">Aeropuerto Ice Beaches</option>
+                        <option value="Aeropuerto Bartolome Island">Aeropuerto de Bartolome Island</option>
+                        <option value="Aeropuerto de Medellin">Aeropuerto de Medellín</option>
+                        <option value="Aeropuerto de Trolome">Aeropuerto de Trolome</option>
+                        <option value="Aeropuerto de Mykonos">Aeropuerto de Mykonos</option>
+                        <option value="Aeropuerto de Rio Coca">Aeropuerto de Rio Coca</option>
                     </select>
                 </div>
                 <div class="column">
                     <label for="llegada">Llegada:</label>
                     <select id="llegada" name="llegada" required>
                         <option value="" disabled selected hidden>Escoger...</option>
-                        <option value="Aeropuerto Internacional Patata City">Aeropuerto Internacional Patata City</option>
-                        <option value="Aeropuerto Bartolome Island">Aeropuerto Bartolome Island</option>
-                        <option value="Aeropuerto La Fernandina">Aeropuerto La Fernandina</option>
-                        <option value="Aeropuerto de Trolome">Aeropuerto Ice Beaches</option>
-                        <option value="Aeropuerto de Mykonos">Aeropuerto Ice Beaches</option>
-                        <option value="Aeropuerto de Rio Coca">Aeropuerto Ice Beaches</option>
+                        <option value="Aeropuerto Internacional Patata City">Aeropuerto Internacional de Patata City</option>
+                        <option value="Aeropuerto Bartolome Island">Aeropuerto de Bartolome Island</option>
+                        <option value="Aeropuerto de Medellin">Aeropuerto de Medellín</option>
+                        <option value="Aeropuerto de Trolome">Aeropuerto de Trolome</option>
+                        <option value="Aeropuerto de Mykonos">Aeropuerto de Mykonos</option>
+                        <option value="Aeropuerto de Rio Coca">Aeropuerto de Rio Coca</option>
                     </select>
                 </div>
                 <div class="column">
@@ -307,21 +307,13 @@
         
 
        // document.getElementById("otroElemento").setAttribute("disabled", true); // Deshabilitar campo
-    } else if (type === "PRIVADO") {
+    } else if (type === "PRIVADO" | type === "MANUAL") {
         visibleElement.style.display = "none";
         document.getElementById("vuelo").removeAttribute("required");
         document.getElementById("otroElemento").setAttribute("required", "required");
         invisibleElement.style.display = "block";
         document.getElementById("vuelo").value = ""; // Limpiar campo
         //document.getElementById("otroElemento").removeAttribute("disabled"); // Habilitar campo
-    } else if (type === "MANUAL") {
-        visibleElement.style.display = "none";
-        document.getElementById("vuelo").removeAttribute("required");
-        document.getElementById("otroElemento").setAttribute("required", "required");
-        invisibleElement.style.display = "block";
-        document.getElementById("vuelo").value = ""; // Limpiar campo
-        //document.getElementById("otroElemento").removeAttribute("disabled"); // Habilitar campo
-    }
 }
 
 
