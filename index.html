@@ -290,6 +290,18 @@
             precioTotal.value = person;
             precioTotal.textContent = person;
         }
+
+        function toggleDateField() {
+        var ida = document.getElementById("ida").value;
+        var fechaRegresoElement = document.getElementById("invisibleElement1");
+        if (ida === "SI") {
+            fechaRegresoElement.style.display = "block";
+            // Establecer la fecha mínima como la fecha actual
+            document.getElementById("fechaRegreso").min = new Date().toISOString().split('T')[0];
+        } else {
+            fechaRegresoElement.style.display = "none";
+        }
+    } 
         function toggleElements() {
     var type = document.getElementById("type").value;
     var visibleElement = document.getElementById("visibleElement");
